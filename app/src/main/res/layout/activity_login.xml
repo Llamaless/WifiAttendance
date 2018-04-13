@@ -62,6 +62,7 @@
         android:layout_below="@+id/username"
         android:ems="10"
         android:inputType="textPersonName"
+        android:hint=""
         android:textColor="@color/colorSecondaryText" />
 
     <TextView
@@ -85,6 +86,7 @@
         android:layout_marginTop="-193dp"
         android:ems="10"
         android:inputType="textPassword"
+        android:hint=""
         android:textColor="@color/colorSecondaryText" />
 
     <Button

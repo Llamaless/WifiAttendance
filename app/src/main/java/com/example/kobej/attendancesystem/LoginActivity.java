@@ -1,5 +1,6 @@
 package com.example.kobej.attendancesystem;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,7 +12,12 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class LoginActivity extends AppCompatActivity {
+/**
+ * Created by Kobe Davis - 6905105
+ * 07/04/18
+ */
+
+public class LoginActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

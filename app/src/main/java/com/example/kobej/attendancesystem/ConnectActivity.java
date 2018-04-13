@@ -1,5 +1,6 @@
 package com.example.kobej.attendancesystem;
 
+import android.app.Activity;
 import android.content.Context;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiInfo;
@@ -17,7 +18,7 @@ import java.util.List;
  * 05/04/18
  */
 
-public class ConnectActivity extends AppCompatActivity {
+public class ConnectActivity extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
