@@ -32,26 +32,26 @@ public class ConnectActivity extends Activity {
         WifiManager wifiManager = (WifiManager)getApplicationContext()
                 .getSystemService(Context.WIFI_SERVICE);
 
-        forceWifi(wifiManager);
         strongestWifi(wifiManager);
         getInfo(wifiManager);
     }
 
-    public void forceWifi(WifiManager wifiManager){
-        //Forces the wifi to be on allowing the app to work
-        wifiManager.setWifiEnabled(true);
-    }
 
     public void strongestWifi(WifiManager wifiManager){
-        //finds the strongest wifi
+        /*
+        finds the strongest wifi
+         */
         TextView textView;
+        //scans all available wifi points and outputs list of results
         List<ScanResult> results = wifiManager.getScanResults();
         String message;
+        //as long as results aren't empty runs
         if(results != null){
             final int size = results.size();
             if(size == 0){
                 message = "No access points in range";
             }else{
+                //gets first result as a variable
                 ScanResult signal = results.get(0);
                 int counter = 1;
                 for(ScanResult result : results){
@@ -60,6 +60,7 @@ public class ConnectActivity extends Activity {
                     " : " + result.level + "\n" + result.BSSID +
                     "\n" + result.capabilities + "\n" +
                     "\n =============================\n");
+                    //if any of the other results are stronger they become signal
                     if(wifiManager.compareSignalLevel(signal.level, result.level
                     )<0){
                         signal = result;
@@ -74,7 +75,9 @@ public class ConnectActivity extends Activity {
     }
 
     public ArrayList<String> getInfo(WifiManager wifiManager){
-        //finds the BSSID and MacAddress using wifiInfo
+        /*
+        finds the BSSID and MacAddress using wifiInfo
+         */
         ArrayList<String> info = new ArrayList<>();
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
         info.add(wifiInfo.getBSSID());
@@ -84,6 +87,9 @@ public class ConnectActivity extends Activity {
     }
 
     public void setText(ArrayList<String> info){
+        /*
+        sets text views
+         */
         TextView bssid, macaddress;
         bssid = findViewById(R.id.text);
         macaddress = findViewById(R.id.text2);
