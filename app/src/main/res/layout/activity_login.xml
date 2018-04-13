@@ -13,13 +13,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="137dp"
+        android:layout_marginTop="140dp"
         android:fontFamily="sans-serif"
         android:text="@string/login_title2"
         android:textColor="@color/colorPrimaryText"
         android:textSize="30sp"
-        android:typeface="monospace"
         android:textStyle="bold"
+        android:typeface="monospace"
         tools:layout_editor_absoluteX="146dp"
         tools:layout_editor_absoluteY="148dp" />
 
@@ -31,4 +31,25 @@
         android:layout_alignParentTop="true"
         android:layout_marginTop="38dp"
         app:srcCompat="@drawable/coventry" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="193dp"
+        android:text="@string/login_main"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="25sp"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/loginTitle"
+        android:layout_marginTop="236dp"
+        android:text="TextView" />
 </RelativeLayout>

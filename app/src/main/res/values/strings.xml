@@ -3,4 +3,6 @@
     <string name="login_title">Welcome</string>
     <string name="login_title2">Coventry University</string>
     <string name="login_main">Please Login</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
 </resources>
