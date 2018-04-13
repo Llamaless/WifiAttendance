@@ -8,6 +8,8 @@ import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,6 +52,7 @@ public class ConnectActivity extends Activity {
 
         strongestWifi(wifiManager);
         setText(wifiManager, username);
+        onButtonClick();
     }
 
 
@@ -151,6 +154,25 @@ public class ConnectActivity extends Activity {
             e.printStackTrace();
         }
         return 4;
+    }
+
+    public void onButtonClick(){
+        /*
+        Code for what happens when the sign in button is
+        clicked
+         */
+        Button signIn = findViewById(R.id.sigin_button);
+        signIn.setOnClickListener(new View.OnClickListener() {
+            @Override 
+            public void onClick(View v) {
+                resetText();
+            }
+        });
+    }
+
+    public void resetText(){
+        TextView value = findViewById(R.id.text2);
+        value.setText("You have been signed in");
     }
 
 }

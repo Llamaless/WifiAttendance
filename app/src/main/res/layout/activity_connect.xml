@@ -14,7 +14,10 @@
         android:layout_above="@+id/text2"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="-165dp"
-        android:text="Hello World!"
+        android:text=""
+        android:textStyle="bold"
+        android:textSize="30sp"
+        android:textColor="@color/colorPrimaryText"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -27,8 +30,22 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="182dp"
-        android:text="TextView"
+        android:text=""
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="24sp"
+        android:textStyle="bold"
         tools:layout_editor_absoluteX="162dp"
         tools:layout_editor_absoluteY="276dp" />
+
+    <Button
+        android:id="@+id/sigin_button"
+        android:layout_width="87dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="243dp"
+        android:background="@drawable/btn_default"
+        android:text="@string/signin_button"
+        android:textStyle="bold"/>
 
 </RelativeLayout>
