@@ -41,7 +41,7 @@ public class LoginActivity extends Activity {
         wifiManager.setWifiEnabled(true);
     }
 
-    public boolean valid(){
+    public void valid(){
         /*
         checks that username and password are valid
         */
@@ -50,26 +50,20 @@ public class LoginActivity extends Activity {
         EditText username, password;
         username = findViewById(R.id.inputUsername);
         password = findViewById(R.id.inputPassword);
-        String user = username.toString();
-        String pass = password.toString();
-        boolean validation;
-
+        String user = String.valueOf(username.getText());
+        String pass = String.valueOf(password.getText());
         //comparing gathered values to known values
-        if(user.equals("davisk14")){
-            if(pass.equals("password")){
-                validation = true;
-            }else{
-                //error message
-                Toast.makeText(getApplicationContext(),"Invalid password",Toast.LENGTH_SHORT).show();
-                validation = false;
-            }
+        if(pass.equals("pass")){
+            Intent carry = new Intent(LoginActivity.this, ConnectActivity.class);
+            ArrayList<String> carried;
+            carried = carryOver();
+            carry.putStringArrayListExtra("carried", carried);
+            startActivity(carry);
+            finish();
         }else{
             //error message
-            Toast.makeText(getApplicationContext(),"Invalid Username",Toast.LENGTH_SHORT).show();
-            validation = false;
+            Toast.makeText(getApplicationContext(),"Invalid username or password",Toast.LENGTH_SHORT).show();
         }
-        //returns findings
-        return  validation;
     }
 
     public ArrayList carryOver(){
@@ -93,18 +87,7 @@ public class LoginActivity extends Activity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                boolean validation = valid();
-                if(validation == true){
-                    Intent carry = new Intent(LoginActivity.this, ConnectActivity.class);
-                    ArrayList<String> carried;
-                    carried = carryOver();
-                    carry.putStringArrayListExtra("carried", carried);
-                    startActivity(carry);
-                    finish();
-                }else{
-                    //error message
-                    Toast.makeText(getApplicationContext(),"Please try again", Toast.LENGTH_SHORT).show();
-                }
+                valid();
             }
         });
     }

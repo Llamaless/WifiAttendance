@@ -96,4 +96,5 @@ public class ConnectActivity extends Activity {
         bssid.setText(info.get(0));
         macaddress.setText(info.get(1));
     }
+    
 }
