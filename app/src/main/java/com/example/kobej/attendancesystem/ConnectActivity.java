@@ -2,6 +2,7 @@ package com.example.kobej.attendancesystem;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
@@ -32,8 +33,17 @@ public class ConnectActivity extends Activity {
         WifiManager wifiManager = (WifiManager)getApplicationContext()
                 .getSystemService(Context.WIFI_SERVICE);
 
+        /*
+        Getting the information passed from the previous intent
+         */
+        Intent intent = getIntent();
+        ArrayList<String> carried;
+        carried = intent.getStringArrayListExtra("carryList");
+        String username = String.valueOf(carried.get(0));
+
+
         strongestWifi(wifiManager);
-        getInfo(wifiManager);
+        setText(wifiManager, username);
     }
 
 
@@ -74,27 +84,26 @@ public class ConnectActivity extends Activity {
         }
     }
 
-    public ArrayList<String> getInfo(WifiManager wifiManager){
+    public String getInfo(WifiManager wifiManager){
         /*
-        finds the BSSID and MacAddress using wifiInfo
+        finds the BSSID using wifiInfo
          */
-        ArrayList<String> info = new ArrayList<>();
+        String info;
         WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-        info.add(wifiInfo.getBSSID());
-        info.add(wifiInfo.getMacAddress());
-        setText(info);
+        info = wifiInfo.getBSSID();
         return info;
     }
 
-    public void setText(ArrayList<String> info){
+    public void setText(WifiManager wifiManager, String user){
         /*
         sets text views
          */
-        TextView bssid, macaddress;
-        bssid = findViewById(R.id.text);
-        macaddress = findViewById(R.id.text2);
-        bssid.setText(info.get(0));
-        macaddress.setText(info.get(1));
+        TextView bssid, username;
+        String info = getInfo(wifiManager);
+        bssid = findViewById(R.id.text2);
+        username = findViewById(R.id.text);
+        bssid.setText(info);
+        username.setText(user);
     }
-    
+
 }

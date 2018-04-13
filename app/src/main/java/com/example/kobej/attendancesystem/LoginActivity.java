@@ -57,7 +57,7 @@ public class LoginActivity extends Activity {
             Intent carry = new Intent(LoginActivity.this, ConnectActivity.class);
             ArrayList<String> carried;
             carried = carryOver();
-            carry.putStringArrayListExtra("carried", carried);
+            carry.putStringArrayListExtra("carryList", carried);
             startActivity(carry);
             finish();
         }else{
@@ -73,7 +73,7 @@ public class LoginActivity extends Activity {
          */
         EditText username;
         username = findViewById(R.id.inputUsername);
-        String user = username.toString();
+        String user = String.valueOf(username.getText());
         ArrayList<String> carried = new ArrayList<>();
         carried.add(user);
         return carried;
