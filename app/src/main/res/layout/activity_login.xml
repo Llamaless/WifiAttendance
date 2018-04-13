@@ -33,23 +33,70 @@
         app:srcCompat="@drawable/coventry" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/loginMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_below="@+id/loginTitle"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="193dp"
         android:text="@string/login_main"
         android:textColor="@color/colorPrimaryText"
-        android:textSize="25sp"
-        android:textStyle="bold"/>
+        android:textSize="28sp"
+        android:textStyle="bold" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_alignStart="@+id/loginTitle"
-        android:layout_marginTop="236dp"
-        android:text="TextView" />
+        android:layout_centerVertical="true"
+        android:text="@string/username"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/inputUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/loginTitle"
+        android:layout_below="@+id/username"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textColor="@color/colorSecondaryText" />
+
+    <TextView
+        android:id="@+id/password"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/loginTitle"
+        android:layout_marginBottom="193dp"
+        android:text="@string/password"
+        android:textColor="@color/colorPrimaryText"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/inputPassword"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/loginTitle"
+        android:layout_below="@+id/password"
+        android:layout_marginTop="-193dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:textColor="@color/colorSecondaryText" />
+
+    <Button
+        android:id="@+id/loginButton"
+        style="@android:style/Widget.DeviceDefault.Button.Inset"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="70dp"
+        android:background="@android:drawable/bottom_bar"
+        android:backgroundTint="@color/colorDivider"
+        android:elevation="0dp"
+        android:text="Button" />
 </RelativeLayout>
