@@ -99,5 +99,7 @@
         android:layout_marginBottom="70dp"
         android:background="@drawable/btn_login"
         android:elevation="0dp"
-        android:text="Button" />
+        android:text="@string/login_button"
+        android:textColor="@color/colorPrimaryText"
+        android:textStyle="bold"/>
 </RelativeLayout>
