@@ -11,8 +11,14 @@ import android.os.Bundle;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 /**
  * Created by Kobe Davis - 6905105
@@ -102,8 +108,49 @@ public class ConnectActivity extends Activity {
         String info = getInfo(wifiManager);
         bssid = findViewById(R.id.text2);
         username = findViewById(R.id.text);
-        bssid.setText(info);
-        username.setText(user);
+        bssid.setText(info.toString());
+        Integer time = time();
+        if(time.equals(1)){
+            username.setText("Good Morning" + user);
+        }
+        if(time.equals(2)){
+            username.setText("Good Afternoon " + user);
+        }
+        if(time.equals(3)){
+            username.setText("Good Evening " + user);
+        }
+
+    }
+
+    public Integer time(){
+        /*
+        works out the time to greet person based on time
+        will also be useful for determining class times
+         */
+        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+        SimpleDateFormat simpleDate = new SimpleDateFormat("HH:mm aa", Locale.getDefault());
+        Date time = calendar.getTime();
+        try{
+            Date comparison = simpleDate.parse("12:00 PM");
+            Date comparison2 = simpleDate.parse("5:00 PM");
+            if(time.after(comparison2)){
+                return 3;
+            }
+            if((time.after(comparison)) && (time.before(comparison2))){
+                return 2;
+            }
+            if(time.before(comparison)){
+                return 1;
+            }
+            if(time.equals(comparison)){
+                return 2;
+            }
+
+        }catch (ParseException e){
+            //Todo Auto Generated catch block
+            e.printStackTrace();
+        }
+        return 4;
     }
 
 }
