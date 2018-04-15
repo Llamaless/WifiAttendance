@@ -6,4 +6,6 @@
     <string name="username">Username:</string>
     <string name="password">Password:</string>
     <string name="signin_button">Sign In</string>
+    <string name="text_on">Staff</string>
+    <string name="text_off">Student</string>
 </resources>

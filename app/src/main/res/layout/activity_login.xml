@@ -47,8 +47,8 @@
         android:id="@+id/username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/inputUsername"
         android:layout_alignStart="@+id/loginTitle"
-        android:layout_centerVertical="true"
         android:text="@string/username"
         android:textColor="@color/colorPrimaryText"
         android:textSize="24sp"
@@ -58,20 +58,20 @@
         android:id="@+id/inputUsername"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/loginTitle"
-        android:layout_below="@+id/username"
+        android:layout_marginBottom="229dp"
         android:ems="10"
-        android:inputType="textPersonName"
         android:hint=""
+        android:inputType="textPersonName"
         android:textColor="@color/colorSecondaryText" />
 
     <TextView
         android:id="@+id/password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_above="@+id/inputPassword"
         android:layout_alignStart="@+id/loginTitle"
-        android:layout_marginBottom="193dp"
         android:text="@string/password"
         android:textColor="@color/colorPrimaryText"
         android:textSize="24sp"
@@ -81,12 +81,12 @@
         android:id="@+id/inputPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/loginTitle"
-        android:layout_below="@+id/password"
-        android:layout_marginTop="-193dp"
+        android:layout_marginBottom="142dp"
         android:ems="10"
-        android:inputType="textPassword"
         android:hint=""
+        android:inputType="textPassword"
         android:textColor="@color/colorSecondaryText" />
 
     <Button
@@ -96,10 +96,22 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="70dp"
+        android:layout_marginBottom="50dp"
         android:background="@drawable/btn_default"
         android:elevation="0dp"
         android:text="@string/login_button"
         android:textColor="@color/colorPrimaryText"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
+
+    <Switch
+        android:id="@+id/positionSwitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="244dp"
+        android:textOff="@string/text_off"
+        android:textOn="@string/text_on"
+        android:track="@drawable/switch_track"
+        tools:checked="false" />
 </RelativeLayout>

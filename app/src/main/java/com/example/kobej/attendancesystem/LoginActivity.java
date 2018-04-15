@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -41,9 +42,21 @@ public class LoginActivity extends Activity {
         wifiManager.setWifiEnabled(true);
     }
 
-    public void valid(){
+    public boolean switchState(){
+        Switch position;
+        position = findViewById(R.id.positionSwitch);
+        boolean checked = true;
+        if(position.isChecked()){
+            checked = true;
+        }else{
+            checked = false;
+        }
+        return checked;
+    }
+
+    public void validStudent(){
         /*
-        checks that username and password are valid
+        checks that username and password are valid for a student
         */
 
         //getting username and password from there respective fields
@@ -55,6 +68,31 @@ public class LoginActivity extends Activity {
         //comparing gathered values to known values
         if(pass.equals("pass")){
             Intent carry = new Intent(LoginActivity.this, ConnectActivity.class);
+            ArrayList<String> carried;
+            carried = carryOver();
+            carry.putStringArrayListExtra("carryList", carried);
+            startActivity(carry);
+            finish();
+        }else{
+            //error message
+            Toast.makeText(getApplicationContext(),"Invalid username or password",Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void validStaff(){
+        /*
+        checks that username and password are valid for a staff
+        */
+
+        //getting username and password from there respective fields
+        EditText username, password;
+        username = findViewById(R.id.inputUsername);
+        password = findViewById(R.id.inputPassword);
+        String user = String.valueOf(username.getText());
+        String pass = String.valueOf(password.getText());
+        //comparing gathered values to known values
+        if(pass.equals("staff1")){
+            Intent carry = new Intent(LoginActivity.this, StaffActivity.class);
             ArrayList<String> carried;
             carried = carryOver();
             carry.putStringArrayListExtra("carryList", carried);
@@ -87,7 +125,8 @@ public class LoginActivity extends Activity {
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                valid();
+                boolean checked = switchState();
+                validStaff();
             }
         });
     }

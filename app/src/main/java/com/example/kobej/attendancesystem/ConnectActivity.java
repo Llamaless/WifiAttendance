@@ -163,7 +163,7 @@ public class ConnectActivity extends Activity {
          */
         Button signIn = findViewById(R.id.sigin_button);
         signIn.setOnClickListener(new View.OnClickListener() {
-            @Override 
+            @Override
             public void onClick(View v) {
                 resetText();
             }
