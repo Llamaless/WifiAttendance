@@ -9,7 +9,10 @@ import android.net.wifi.WifiManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,11 +32,18 @@ import java.util.TimeZone;
 
 public class ConnectActivity extends Activity {
 
+    public DBHandler dbHandler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_connect);
 
+         /*
+        Setting up Database hanler
+         */
+        dbHandler = new DBHandler(this);
+
+        /*
         /*
         creating a wifi manager
         Essential to accessing all of the wifi
@@ -49,7 +59,7 @@ public class ConnectActivity extends Activity {
         carried = intent.getStringArrayListExtra("carryList");
         String username = String.valueOf(carried.get(0));
 
-
+        listViewSet(username);
         strongestWifi(wifiManager);
         setText(wifiManager, username);
         onButtonClick();
@@ -171,8 +181,31 @@ public class ConnectActivity extends Activity {
     }
 
     public void resetText(){
+        /*
+        resets the text view to notify the user of changes
+         */
         TextView value = findViewById(R.id.text2);
         value.setText("You have been signed in");
     }
+
+    public void listViewSet(String user){
+        final ListView classes;
+        classes = findViewById(R.id.listClasses2);
+        ArrayList id;
+        id = dbHandler.getStudentClasses1(user);
+        String idNumber = String.valueOf(id.get(0));
+        ArrayList lectures;
+        lectures = dbHandler.getStudentClasses2(idNumber);
+        //String[] lectures = new String[] {"Class 1", "Class 2", "Class 3"};
+        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.listview, lectures);
+        classes.setAdapter(adapter);
+        classes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String item = (String)classes.getItemAtPosition(position);
+            }
+        });
+    }
+
 
 }

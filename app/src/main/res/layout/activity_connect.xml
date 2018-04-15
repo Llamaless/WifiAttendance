@@ -43,9 +43,16 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="243dp"
+        android:layout_marginBottom="58dp"
         android:background="@drawable/btn_default"
         android:text="@string/signin_button"
-        android:textStyle="bold"/>
+        android:textStyle="bold" />
+
+    <ListView
+        android:id="@+id/listClasses2"
+        android:layout_width="match_parent"
+        android:layout_height="256dp"
+        android:layout_below="@+id/text2"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

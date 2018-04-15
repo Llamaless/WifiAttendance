@@ -22,10 +22,17 @@ import java.util.ArrayList;
 
 public class LoginActivity extends Activity {
 
+    private DBHandler dbHandler;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
+        /*
+        Setting up Database hanler
+         */
+        dbHandler = new DBHandler(this);
+
         /*
         creating a wifi manager
         Essential to accessing all of the wifi
@@ -33,8 +40,11 @@ public class LoginActivity extends Activity {
         WifiManager wifiManager = (WifiManager)getApplicationContext()
                 .getSystemService(Context.WIFI_SERVICE);
 
+        dbHandler.insertStudent(002, "Kobe Davis");
+        dbHandler.insertDetails(002, "davisk14", "test");
         forceWifi(wifiManager);
         onButtonPress();
+
 
     }
 
@@ -66,8 +76,10 @@ public class LoginActivity extends Activity {
         password = findViewById(R.id.inputPassword);
         String user = String.valueOf(username.getText());
         String pass = String.valueOf(password.getText());
+        ArrayList actualPass = dbHandler.getPasswordStudent(user);
+        String actualPassString = String.valueOf(actualPass.get(0));
         //comparing gathered values to known values
-        if(pass.equals("pass")){
+        if(pass.equals(actualPassString)){
             Intent carry = new Intent(LoginActivity.this, ConnectActivity.class);
             ArrayList<String> carried;
             carried = carryOver();
@@ -91,8 +103,10 @@ public class LoginActivity extends Activity {
         password = findViewById(R.id.inputPassword);
         String user = String.valueOf(username.getText());
         String pass = String.valueOf(password.getText());
+        ArrayList actualPass = dbHandler.getPasswordStaff(user);
+        String actualPassString = String.valueOf(actualPass.get(0));
         //comparing gathered values to known values
-        if(pass.equals("staff1")){
+        if(pass.equals(actualPassString)){
             Intent carry = new Intent(LoginActivity.this, StaffActivity.class);
             ArrayList<String> carried;
             carried = carryOver();
@@ -127,7 +141,12 @@ public class LoginActivity extends Activity {
             @Override
             public void onClick(View v) {
                 boolean checked = switchState();
-                validStaff();
+                if(checked == true){
+                    validStaff();
+                }
+                if(checked == false){
+                    validStudent();
+                }
             }
         });
     }
