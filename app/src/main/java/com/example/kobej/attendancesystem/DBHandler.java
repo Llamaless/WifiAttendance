@@ -39,6 +39,7 @@ public class DBHandler extends SQLiteOpenHelper {
         db.execSQL("create table loginStaff" + "(id integer primary key, username text, password text, idNumber integer)");
         db.execSQL("create table staff" + "(id integer primary key, fullName text, idNumber integer)");
         db.execSQL("create table class" + "(id integer primary key, code text, name text, startTime text, endTime text)");
+        db.execSQL("create table class2" + "(id integer primary key, code text, name text, startTime text, endTime text, day text)");
         db.execSQL("create table studentClass" + "(id integer primary key, idNumber integer, code text)");
     }
 
@@ -52,6 +53,7 @@ public class DBHandler extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS loginStaff");
         db.execSQL("DROP TABLE IF EXISTS class");
         db.execSQL("DROP TABLE IF EXISTS studentClass");
+        db.execSQL("DROP TABLE IF EXISTS class2");
         onCreate(db);
     }
 
@@ -114,6 +116,18 @@ public class DBHandler extends SQLiteOpenHelper {
         contentValues.put("code", code);
         contentValues.put("id", id);
         db.insert("studentClass", null, contentValues);
+        return true;
+    }
+
+    public boolean insertClass2(String code, String name, String startTime, String endTime, String day){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("code", code);
+        contentValues.put("name", name);
+        contentValues.put("startTime", startTime);
+        contentValues.put("endTime", endTime);
+        contentValues.put("day", day);
+        db.insert("class", null, contentValues);
         return true;
     }
 

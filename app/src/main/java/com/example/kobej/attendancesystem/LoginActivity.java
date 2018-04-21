@@ -40,8 +40,7 @@ public class LoginActivity extends Activity {
         WifiManager wifiManager = (WifiManager)getApplicationContext()
                 .getSystemService(Context.WIFI_SERVICE);
 
-        dbHandler.insertStudent(002, "Kobe Davis");
-        dbHandler.insertDetails(002, "davisk14", "test");
+        dbHandler.insertClass2("104MS","Logic and Sets","9:00 AM","4:00 PM", "Monday");
         forceWifi(wifiManager);
         onButtonPress();
 
