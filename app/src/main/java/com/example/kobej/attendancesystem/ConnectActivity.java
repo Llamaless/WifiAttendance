@@ -117,12 +117,12 @@ public class ConnectActivity extends Activity {
         /*
         sets text views
          */
-        TextView bssid, username;
-        String info = getInfo(wifiManager);
-        bssid = findViewById(R.id.text2);
+        TextView message, username;
+        //String info = getInfo(wifiManager);
+        message = findViewById(R.id.text2);
         username = findViewById(R.id.text);
-        bssid.setText(info.toString());
-        username.setText("Hello" + user);
+        message.setText("You have not yet attempted to sign in");
+        username.setText("Hello " + user);
     }
 
     public void onButtonClick(){
@@ -158,25 +158,30 @@ public class ConnectActivity extends Activity {
     public void getTime(String code, String username){
         /*
         Gets the time and compares it to the times from the database
+        does the same with the date and bssid
          */
+        WifiManager wifiManager = (WifiManager)getApplicationContext()
+                .getSystemService(Context.WIFI_SERVICE);
         Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
         SimpleDateFormat simpleDate = new SimpleDateFormat("HH:mm aa", Locale.getDefault());
         SimpleDateFormat stringFormat = new SimpleDateFormat("HH:mm");
         SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
         Date d = new Date();
         String dayOfTheWeek = sdf.format(d);
-        ArrayList times, times2, times3;
+        ArrayList times, times2, times3, times4;
         times = dbHandler.getTimes1(code);
         times2 = dbHandler.getTimes2(code);
         times3 = dbHandler.getTimes3(code);
-        Date firstTime = calendar.getTime();
-        String stringTime = stringFormat.format(firstTime);
+        //times4 = dbHandler.getTimes4(code);
+        Date time = calendar.getTime();
+        String stringTime = stringFormat.format(time);
         try{
-            Date time = simpleDate.parse(stringTime);
             Date comparison1 = simpleDate.parse(String.valueOf(times.get(0)));
             Date comparison2 = simpleDate.parse(String.valueOf(times2.get(0)));
             String currentDay = String.valueOf(times3.get(0));
-            if((time.after(comparison1)) && (time.before(comparison2)) && dayOfTheWeek.equals(currentDay)){
+            //String bssid = String.valueOf(times4.get(0));
+            //String info = getInfo(wifiManager);
+            if((time.after(comparison1)) && (time.after(comparison2)) && dayOfTheWeek.equals(currentDay)){
                 resetText();
                 dbHandler.insertSigned(username, stringTime, code);
             }else{

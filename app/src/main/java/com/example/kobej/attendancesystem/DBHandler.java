@@ -26,6 +26,7 @@ public class DBHandler extends SQLiteOpenHelper {
     public static final String ST = "startTime";
     public static final String ET = "endTime";
     public static final String DAY = "day";
+    public static final String BSSID =  "bssid";
 
 
     //defines the database
@@ -46,6 +47,7 @@ public class DBHandler extends SQLiteOpenHelper {
         db.execSQL("create table studentClass" + "(id integer primary key, idNumber integer, code text)");
         db.execSQL("create table lectureClass" + "(id integer primary key, idNumber inetger, code text)");
         db.execSQL("create table signedIn" + "(id integer primary key, username text, time text, code text)");
+        db.execSQL("create table classI" + "(id integer primary key, code text, day text, bssid text)");
     }
 
     //when checking the database if tables already  exists drops them
@@ -61,6 +63,7 @@ public class DBHandler extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS class2");
         db.execSQL("DROP TABLE IF EXISTS lectureClass");
         db.execSQL("DROP TABLE IF EXISTS signedIn");
+        db.execSQL("DROP TABLE IF EXISTS classI");
         onCreate(db);
     }
 
@@ -147,6 +150,16 @@ public class DBHandler extends SQLiteOpenHelper {
         return true;
     }
 
+    public boolean insertClassI(String code, String day, String bssid){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("code", code);
+        contentValues.put("day", day);
+        contentValues.put("bssid", bssid);
+        db.insert("classI", null, contentValues);
+        return true;
+    }
+
     public boolean insertSigned(String username, String time, String code){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -184,7 +197,7 @@ public class DBHandler extends SQLiteOpenHelper {
     public ArrayList getStudentClasses1(String username1){
         ArrayList<String> id = new ArrayList<>();
         SQLiteDatabase db =  this.getReadableDatabase();
-        Cursor res = db.rawQuery("SELECT idNumber FROM loginDetails WHERE username" + " =?", new String[]{username1});
+        Cursor res = db.rawQuery("SELECT idNumber FROM loginStaff WHERE username" + " =?", new String[]{username1});
         res.moveToFirst();
         while(res.isAfterLast()==false){
             id.add(res.getString(0));
@@ -196,7 +209,7 @@ public class DBHandler extends SQLiteOpenHelper {
     public ArrayList getStudentClasses2(String id){
         ArrayList<String> code = new ArrayList<>();
         SQLiteDatabase db =  this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT code FROM studentClass WHERE id" + "=?", new String[]{id});
+        Cursor cursor = db.rawQuery("SELECT code FROM lecturerClass WHERE id" + "=?", new String[]{id});
         cursor.moveToFirst();
         while(cursor.isAfterLast()==false){
             code.add(cursor.getString(0));
@@ -239,6 +252,54 @@ public class DBHandler extends SQLiteOpenHelper {
             cursor.moveToNext();
         }
         return times;
+    }
+
+    public ArrayList getTimes4(String code){
+        ArrayList times = new ArrayList();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT bssid FROM classI WHERE code" + "=?", new String[]{code});
+        cursor.moveToFirst();
+        while(cursor.isAfterLast()==false){
+            times.add(cursor.getString(cursor.getColumnIndex(BSSID)));
+            cursor.moveToNext();
+        }
+        return times;
+    }
+
+    public ArrayList getLClasses1(String username1){
+        ArrayList<String> id = new ArrayList<>();
+        SQLiteDatabase db =  this.getReadableDatabase();
+        Cursor res = db.rawQuery("SELECT idNumber FROM loginDetails WHERE username" + " =?", new String[]{username1});
+        res.moveToFirst();
+        while(res.isAfterLast()==false){
+            id.add(res.getString(0));
+            res.moveToNext();
+        }
+        return id;
+    }
+
+    public ArrayList getLClasses2(String id){
+        ArrayList<String> code = new ArrayList<>();
+        SQLiteDatabase db =  this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT code FROM studentClass WHERE id" + "=?", new String[]{id});
+        cursor.moveToFirst();
+        while(cursor.isAfterLast()==false){
+            code.add(cursor.getString(cursor.getColumnIndex("code")));
+            cursor.moveToNext();
+        }
+        return code;
+    }
+    public ArrayList<String> getAllStudents(String code){
+        ArrayList<String> arrayList = new ArrayList<>();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res = db.rawQuery("select * from signedIn WHERE code =?", new String[]{code} );
+        res.moveToFirst();
+
+        while(res.isAfterLast()== false){
+            arrayList.add(res.getString(res.getColumnIndex(DETAILS_USERNAME)));
+            res.moveToNext();
+        }
+        return arrayList;
     }
 
 

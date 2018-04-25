@@ -13,6 +13,7 @@ import java.util.ArrayList;
 
 
 public class StaffActivity extends Activity{
+    private DBHandler dbHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,38 +28,42 @@ public class StaffActivity extends Activity{
         carried = intent.getStringArrayListExtra("carryList");
         String username = String.valueOf(carried.get(0));
 
+         /*
+        Setting up Database hanler
+         */
+        dbHandler = new DBHandler(this);
+
+
         setText(username);
-        listViewSetUp();
+        listViewSetUp(username);
     }
 
-    public void listViewSetUp(){
+    public void listViewSetUp(String username){
         final ListView classes;
         classes = findViewById(R.id.listClasses);
-        String[] lectures = new String[] {"Class 1", "Class 2", "Class 3"};
-        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.listview, lectures);
+        //String[] lectures = new String[] {"Class 1", "Class 2", "Class 3"};
+        ArrayList id, classy;
+        id = dbHandler.getLClasses1(username);
+        classy = dbHandler.getLClasses2(String.valueOf(id.get(0)));
+        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.listview, classy);
         classes.setAdapter(adapter);
         classes.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String item = (String)classes.getItemAtPosition(position);
-                if(item.equals("Class 1")){
-                    resetListView();
-                }
-                if(item.equals("Class 2")){
-                    resetListView();
-                }
-                if(item.equals("Class 3")){
-                    resetListView();
-                }
+                resetListView(item);
+
             }
         });
     }
 
-    public void resetListView(){
-        String[] test = new String[] {"Josh Grobin", "Homer Simpson", "Leela"};
+    public void resetListView(String code){
+        //String[] test = new String[] {"Josh Grobin", "Homer Simpson", "Leela"};
+        ArrayList students;
+        students = dbHandler.getAllStudents(code);
         final ListView classes;
         classes = findViewById(R.id.listClasses);
-        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.listview, test);
+        ArrayAdapter adapter = new ArrayAdapter(this, R.layout.listview, students);
         classes.setAdapter(adapter);
     }
 
@@ -70,9 +75,13 @@ public class StaffActivity extends Activity{
 
     @Override
     public void onBackPressed(){
+        Intent intent = getIntent();
+        ArrayList<String> carried;
+        carried = intent.getStringArrayListExtra("carryList");
+        String username = String.valueOf(carried.get(0));
         /*
         Allows the user to traverse back and forth
          */
-        listViewSetUp();
+        listViewSetUp(username);
     }
 }

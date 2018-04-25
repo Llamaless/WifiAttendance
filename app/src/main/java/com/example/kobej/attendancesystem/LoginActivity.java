@@ -40,7 +40,6 @@ public class LoginActivity extends Activity {
         WifiManager wifiManager = (WifiManager)getApplicationContext()
                 .getSystemService(Context.WIFI_SERVICE);
 
-        //dbHandler.insertClass2("104MS","Logic and Sets","9:00 AM","4:00 PM", "Monday")
         forceWifi(wifiManager);
         //testData();
         onButtonPress();
@@ -55,6 +54,7 @@ public class LoginActivity extends Activity {
         dbHandler.insertClass2("101SM", "Test Class", "8:00 AM", "6:00 PM", "Wednesday");
         dbHandler.insertSC(005, "101SM");
         dbHandler.insertLC(006, "101SM");
+        dbHandler.insertClassI("102SM", "Wednesday", "02:00:00:00:00:00");
     }
 
     public void forceWifi(WifiManager wifiManager){
