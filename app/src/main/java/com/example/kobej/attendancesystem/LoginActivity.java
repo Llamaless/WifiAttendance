@@ -42,6 +42,7 @@ public class LoginActivity extends Activity {
 
         forceWifi(wifiManager);
         //testData();
+        //dummyData();
         onButtonPress();
 
 
@@ -55,6 +56,35 @@ public class LoginActivity extends Activity {
         dbHandler.insertSC(005, "101SM");
         dbHandler.insertLC(006, "101SM");
         dbHandler.insertClassI("102SM", "Wednesday", "02:00:00:00:00:00");
+    }
+
+    public void dummyData(){
+        dbHandler.insertStudent(6, "Jamel King");
+        dbHandler.insertStudent(7, "Fred Dope");
+        dbHandler.insertStudent(8, "Kyron Killew");
+        dbHandler.insertStudent(9, "Lina Kyu");
+        dbHandler.insertStudent(10, "Michelle Rhodes");
+        dbHandler.insertStudent(11, "Kira Phantom");
+        dbHandler.insertDetails(6, "jamel", "jamel");
+        dbHandler.insertDetails(7, "fred", "fred");
+        dbHandler.insertDetails(8, "kyron", "kyron");
+        dbHandler.insertDetails(9, "lina", "lina");
+        dbHandler.insertDetails(10, "michelle", "michelle");
+        dbHandler.insertDetails(11, "kira", "kira");
+        dbHandler.insertSC(6, "101SM");
+        dbHandler.insertSC(7, "101SM");
+        dbHandler.insertSC(8, "101SM");
+        dbHandler.insertSC(9, "101SM");
+        dbHandler.insertSC(10, "101SM");
+        dbHandler.insertSC(11, "101SM");
+        dbHandler.insertSC(6, "107SM");
+        dbHandler.insertSC(7, "107SM");
+        dbHandler.insertSC(8, "107SM");
+        dbHandler.insertClass2("107SM", "History", "8:00 AM", "6:00 PM", "Wednesday");
+        dbHandler.insertStaff(7, "Tishe Kingro");
+        dbHandler.insertDetailsS(7, "staff2", "staff2");
+        dbHandler.insertLC(7, "101SM");
+        dbHandler.insertLC(6, "107SM");
     }
 
     public void forceWifi(WifiManager wifiManager){

@@ -39,7 +39,7 @@ public class ConnectActivity extends Activity {
         setContentView(R.layout.activity_connect);
 
          /*
-        Setting up Database hanler
+        Setting up Database handler
          */
         dbHandler = new DBHandler(this);
 
@@ -130,11 +130,13 @@ public class ConnectActivity extends Activity {
         Code for what happens when the sign in button is
         clicked
          */
+        final Intent finished = new Intent(this, LoginActivity.class);
         Button signIn = findViewById(R.id.sigin_button);
         signIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                resetText();
+                startActivity(finished);
+                finish();
             }
         });
     }

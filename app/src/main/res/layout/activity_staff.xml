@@ -28,8 +28,19 @@
     <ListView
         android:id="@+id/listClasses"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@+id/textName"
-        android:layout_centerHorizontal="true" />
+        android:layout_height="458dp"
+        android:layout_alignParentStart="true"
+        android:layout_centerVertical="true" />
+
+    <Button
+        android:id="@+id/buttonSignOut"
+        android:layout_width="83dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="11dp"
+        android:background="@drawable/btn_default"
+        android:text="@string/signin_button"
+        android:textStyle="bold" />
 
 </RelativeLayout>

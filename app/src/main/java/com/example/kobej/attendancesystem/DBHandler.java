@@ -9,6 +9,10 @@ import android.database.sqlite.SQLiteOpenHelper;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
+/**
+ * Created by Kobe Davis - 6905105
+ * 13/04/18
+ */
 public class DBHandler extends SQLiteOpenHelper {
 
     public static final String DATABASE_NAME = "attendance.db";
@@ -197,7 +201,7 @@ public class DBHandler extends SQLiteOpenHelper {
     public ArrayList getStudentClasses1(String username1){
         ArrayList<String> id = new ArrayList<>();
         SQLiteDatabase db =  this.getReadableDatabase();
-        Cursor res = db.rawQuery("SELECT idNumber FROM loginStaff WHERE username" + " =?", new String[]{username1});
+        Cursor res = db.rawQuery("SELECT idNumber FROM loginDetails WHERE username" + " =?", new String[]{username1});
         res.moveToFirst();
         while(res.isAfterLast()==false){
             id.add(res.getString(0));
@@ -209,7 +213,7 @@ public class DBHandler extends SQLiteOpenHelper {
     public ArrayList getStudentClasses2(String id){
         ArrayList<String> code = new ArrayList<>();
         SQLiteDatabase db =  this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT code FROM lecturerClass WHERE id" + "=?", new String[]{id});
+        Cursor cursor = db.rawQuery("SELECT code FROM studentClass WHERE id" + "=?", new String[]{id});
         cursor.moveToFirst();
         while(cursor.isAfterLast()==false){
             code.add(cursor.getString(0));
@@ -269,7 +273,7 @@ public class DBHandler extends SQLiteOpenHelper {
     public ArrayList getLClasses1(String username1){
         ArrayList<String> id = new ArrayList<>();
         SQLiteDatabase db =  this.getReadableDatabase();
-        Cursor res = db.rawQuery("SELECT idNumber FROM loginDetails WHERE username" + " =?", new String[]{username1});
+        Cursor res = db.rawQuery("SELECT idNumber FROM loginStaff WHERE username" + " =?", new String[]{username1});
         res.moveToFirst();
         while(res.isAfterLast()==false){
             id.add(res.getString(0));
@@ -281,7 +285,7 @@ public class DBHandler extends SQLiteOpenHelper {
     public ArrayList getLClasses2(String id){
         ArrayList<String> code = new ArrayList<>();
         SQLiteDatabase db =  this.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT code FROM studentClass WHERE id" + "=?", new String[]{id});
+        Cursor cursor = db.rawQuery("SELECT * FROM lectureClass WHERE id" + "=?", new String[]{id});
         cursor.moveToFirst();
         while(cursor.isAfterLast()==false){
             code.add(cursor.getString(cursor.getColumnIndex("code")));

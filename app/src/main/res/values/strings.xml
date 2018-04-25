@@ -5,7 +5,7 @@
     <string name="login_main">Please Login</string>
     <string name="username">Username:</string>
     <string name="password">Password:</string>
-    <string name="signin_button">Sign In</string>
+    <string name="signin_button">Log Out</string>
     <string name="text_on">Staff</string>
     <string name="text_off">Student</string>
 </resources>
