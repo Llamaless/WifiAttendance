@@ -40,11 +40,21 @@ public class LoginActivity extends Activity {
         WifiManager wifiManager = (WifiManager)getApplicationContext()
                 .getSystemService(Context.WIFI_SERVICE);
 
-        dbHandler.insertClass2("104MS","Logic and Sets","9:00 AM","4:00 PM", "Monday");
+        //dbHandler.insertClass2("104MS","Logic and Sets","9:00 AM","4:00 PM", "Monday")
         forceWifi(wifiManager);
+        //testData();
         onButtonPress();
 
 
+    }
+    public void testData(){
+        dbHandler.insertStudent(005, "Kobe Davis");
+        dbHandler.insertStaff(006, "Laman Temple");
+        dbHandler.insertDetails(005, "test1", "test1");
+        dbHandler.insertDetailsS(006, "staff1", "staff1");
+        dbHandler.insertClass2("101SM", "Test Class", "8:00 AM", "6:00 PM", "Wednesday");
+        dbHandler.insertSC(005, "101SM");
+        dbHandler.insertLC(006, "101SM");
     }
 
     public void forceWifi(WifiManager wifiManager){
@@ -55,7 +65,7 @@ public class LoginActivity extends Activity {
     public boolean switchState(){
         Switch position;
         position = findViewById(R.id.positionSwitch);
-        boolean checked = true;
+        boolean checked;
         if(position.isChecked()){
             checked = true;
         }else{

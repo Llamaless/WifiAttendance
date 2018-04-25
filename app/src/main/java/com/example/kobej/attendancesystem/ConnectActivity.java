@@ -122,48 +122,7 @@ public class ConnectActivity extends Activity {
         bssid = findViewById(R.id.text2);
         username = findViewById(R.id.text);
         bssid.setText(info.toString());
-        Integer time = time();
-        if(time.equals(1)){
-            username.setText("Good Morning" + user);
-        }
-        if(time.equals(2)){
-            username.setText("Good Afternoon " + user);
-        }
-        if(time.equals(3)){
-            username.setText("Good Evening " + user);
-        }
-
-    }
-
-    public Integer time(){
-        /*
-        works out the time to greet person based on time
-        will also be useful for determining class times
-         */
-        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
-        SimpleDateFormat simpleDate = new SimpleDateFormat("HH:mm aa", Locale.getDefault());
-        Date time = calendar.getTime();
-        try{
-            Date comparison = simpleDate.parse("12:00 PM");
-            Date comparison2 = simpleDate.parse("5:00 PM");
-            if(time.after(comparison2)){
-                return 3;
-            }
-            if((time.after(comparison)) && (time.before(comparison2))){
-                return 2;
-            }
-            if(time.before(comparison)){
-                return 1;
-            }
-            if(time.equals(comparison)){
-                return 2;
-            }
-
-        }catch (ParseException e){
-            //Todo Auto Generated catch block
-            e.printStackTrace();
-        }
-        return 4;
+        username.setText("Hello" + user);
     }
 
     public void onButtonClick(){
@@ -188,7 +147,50 @@ public class ConnectActivity extends Activity {
         value.setText("You have been signed in");
     }
 
-    public void listViewSet(String user){
+    public void resetText2(){
+        /*
+        notifies user if information is incorrect
+         */
+        TextView value = findViewById(R.id.text2);
+        value.setText("You have not been signed in");
+    }
+
+    public void getTime(String code, String username){
+        /*
+        Gets the time and compares it to the times from the database
+         */
+        Calendar calendar = Calendar.getInstance(TimeZone.getDefault());
+        SimpleDateFormat simpleDate = new SimpleDateFormat("HH:mm aa", Locale.getDefault());
+        SimpleDateFormat stringFormat = new SimpleDateFormat("HH:mm");
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE");
+        Date d = new Date();
+        String dayOfTheWeek = sdf.format(d);
+        ArrayList times, times2, times3;
+        times = dbHandler.getTimes1(code);
+        times2 = dbHandler.getTimes2(code);
+        times3 = dbHandler.getTimes3(code);
+        Date firstTime = calendar.getTime();
+        String stringTime = stringFormat.format(firstTime);
+        try{
+            Date time = simpleDate.parse(stringTime);
+            Date comparison1 = simpleDate.parse(String.valueOf(times.get(0)));
+            Date comparison2 = simpleDate.parse(String.valueOf(times2.get(0)));
+            String currentDay = String.valueOf(times3.get(0));
+            if((time.after(comparison1)) && (time.before(comparison2)) && dayOfTheWeek.equals(currentDay)){
+                resetText();
+                dbHandler.insertSigned(username, stringTime, code);
+            }else{
+                resetText2();
+            }
+        }catch (ParseException e){
+            //Todo Auto Generated catch block
+            e.printStackTrace();
+        }
+
+
+    }
+
+    public void listViewSet(final String user){
         final ListView classes;
         classes = findViewById(R.id.listClasses2);
         ArrayList id;
@@ -203,9 +205,11 @@ public class ConnectActivity extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 String item = (String)classes.getItemAtPosition(position);
+                getTime(item, user);
             }
         });
     }
+
 
 
 }

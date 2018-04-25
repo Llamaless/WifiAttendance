@@ -23,6 +23,9 @@ public class DBHandler extends SQLiteOpenHelper {
     public static final String DETAILS_PASSWORD = "password";
     public static final String DETAILS_ID_NO = "idNumber";
     public static final String SC_ID  = "id";
+    public static final String ST = "startTime";
+    public static final String ET = "endTime";
+    public static final String DAY = "day";
 
 
     //defines the database
@@ -41,6 +44,8 @@ public class DBHandler extends SQLiteOpenHelper {
         db.execSQL("create table class" + "(id integer primary key, code text, name text, startTime text, endTime text)");
         db.execSQL("create table class2" + "(id integer primary key, code text, name text, startTime text, endTime text, day text)");
         db.execSQL("create table studentClass" + "(id integer primary key, idNumber integer, code text)");
+        db.execSQL("create table lectureClass" + "(id integer primary key, idNumber inetger, code text)");
+        db.execSQL("create table signedIn" + "(id integer primary key, username text, time text, code text)");
     }
 
     //when checking the database if tables already  exists drops them
@@ -54,6 +59,8 @@ public class DBHandler extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS class");
         db.execSQL("DROP TABLE IF EXISTS studentClass");
         db.execSQL("DROP TABLE IF EXISTS class2");
+        db.execSQL("DROP TABLE IF EXISTS lectureClass");
+        db.execSQL("DROP TABLE IF EXISTS signedIn");
         onCreate(db);
     }
 
@@ -110,7 +117,7 @@ public class DBHandler extends SQLiteOpenHelper {
         return true;
     }
 
-    public boolean inesertSC(Integer id, String code){
+    public boolean insertSC(Integer id, String code){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
         contentValues.put("code", code);
@@ -127,7 +134,26 @@ public class DBHandler extends SQLiteOpenHelper {
         contentValues.put("startTime", startTime);
         contentValues.put("endTime", endTime);
         contentValues.put("day", day);
-        db.insert("class", null, contentValues);
+        db.insert("class2", null, contentValues);
+        return true;
+    }
+
+    public boolean insertLC(Integer id, String code){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("code", code);
+        contentValues.put("id", id);
+        db.insert("lectureClass", null, contentValues);
+        return true;
+    }
+
+    public boolean insertSigned(String username, String time, String code){
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("username", username);
+        contentValues.put("time", time);
+        contentValues.put("code", code);
+        db.insert("signedIn", null, contentValues);
         return true;
     }
 
@@ -177,6 +203,42 @@ public class DBHandler extends SQLiteOpenHelper {
             cursor.moveToNext();
         }
         return code;
+    }
+
+    public ArrayList getTimes1(String code){
+        ArrayList times = new ArrayList();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT * FROM class2 WHERE code" + "=?", new String[]{code});
+        cursor.moveToFirst();
+        while(cursor.isAfterLast()==false){
+            times.add(cursor.getString(cursor.getColumnIndex(ST)));
+            cursor.moveToNext();
+        }
+        return times;
+    }
+
+    public ArrayList getTimes2(String code){
+        ArrayList times = new ArrayList();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT endTime FROM class2 WHERE code" + "=?", new String[]{code});
+        cursor.moveToFirst();
+        while(cursor.isAfterLast()==false){
+            times.add(cursor.getString(cursor.getColumnIndex(ET)));
+            cursor.moveToNext();
+        }
+        return times;
+    }
+
+    public ArrayList getTimes3(String code){
+        ArrayList times = new ArrayList();
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery("SELECT day FROM class2 WHERE code" + "=?", new String[]{code});
+        cursor.moveToFirst();
+        while(cursor.isAfterLast()==false){
+            times.add(cursor.getString(cursor.getColumnIndex(DAY)));
+            cursor.moveToNext();
+        }
+        return times;
     }
 
 
