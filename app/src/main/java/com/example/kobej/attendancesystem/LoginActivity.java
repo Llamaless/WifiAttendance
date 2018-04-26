@@ -39,7 +39,7 @@ public class LoginActivity extends Activity {
         */
         WifiManager wifiManager = (WifiManager)getApplicationContext()
                 .getSystemService(Context.WIFI_SERVICE);
-
+       // dbHandler.insertClassI("101SM", "Thursday", "00:81:c4:e7:39:0e");
         forceWifi(wifiManager);
         //testData();
         //dummyData();
@@ -52,7 +52,7 @@ public class LoginActivity extends Activity {
         dbHandler.insertStaff(006, "Laman Temple");
         dbHandler.insertDetails(005, "test1", "test1");
         dbHandler.insertDetailsS(006, "staff1", "staff1");
-        dbHandler.insertClass2("101SM", "Test Class", "8:00 AM", "6:00 PM", "Wednesday");
+        dbHandler.insertClass2("101SM", "Test Class", "8:00 AM", "11:00 PM", "Thursday");
         dbHandler.insertSC(005, "101SM");
         dbHandler.insertLC(006, "101SM");
         dbHandler.insertClassI("102SM", "Wednesday", "02:00:00:00:00:00");
@@ -80,7 +80,7 @@ public class LoginActivity extends Activity {
         dbHandler.insertSC(6, "107SM");
         dbHandler.insertSC(7, "107SM");
         dbHandler.insertSC(8, "107SM");
-        dbHandler.insertClass2("107SM", "History", "8:00 AM", "6:00 PM", "Wednesday");
+        dbHandler.insertClass2("107SM", "History", "8:00 AM", "6:00 PM", "Thursday");
         dbHandler.insertStaff(7, "Tishe Kingro");
         dbHandler.insertDetailsS(7, "staff2", "staff2");
         dbHandler.insertLC(7, "101SM");
@@ -116,18 +116,23 @@ public class LoginActivity extends Activity {
         String user = String.valueOf(username.getText());
         String pass = String.valueOf(password.getText());
         ArrayList actualPass = dbHandler.getPasswordStudent(user);
+        Integer act = actualPass.size();
         String actualPassString = String.valueOf(actualPass.get(0));
         //comparing gathered values to known values
-        if(pass.equals(actualPassString)){
-            Intent carry = new Intent(LoginActivity.this, ConnectActivity.class);
-            ArrayList<String> carried;
-            carried = carryOver();
-            carry.putStringArrayListExtra("carryList", carried);
-            startActivity(carry);
-            finish();
-        }else{
-            //error message
-            Toast.makeText(getApplicationContext(),"Invalid username or password",Toast.LENGTH_SHORT).show();
+        if(act.equals(0)){
+            Toast.makeText(getApplicationContext(), "Invalid username or password", Toast.LENGTH_SHORT).show();
+        }else {
+            if (pass.equals(actualPassString)) {
+                Intent carry = new Intent(LoginActivity.this, ConnectActivity.class);
+                ArrayList<String> carried;
+                carried = carryOver();
+                carry.putStringArrayListExtra("carryList", carried);
+                startActivity(carry);
+                finish();
+            } else {
+                //error message
+                Toast.makeText(getApplicationContext(), "Invalid username or password", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 

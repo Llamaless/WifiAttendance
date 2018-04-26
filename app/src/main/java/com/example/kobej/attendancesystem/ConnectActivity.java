@@ -174,16 +174,16 @@ public class ConnectActivity extends Activity {
         times = dbHandler.getTimes1(code);
         times2 = dbHandler.getTimes2(code);
         times3 = dbHandler.getTimes3(code);
-        //times4 = dbHandler.getTimes4(code);
+        times4 = dbHandler.getTimes4(code);
         Date time = calendar.getTime();
         String stringTime = stringFormat.format(time);
         try{
             Date comparison1 = simpleDate.parse(String.valueOf(times.get(0)));
             Date comparison2 = simpleDate.parse(String.valueOf(times2.get(0)));
             String currentDay = String.valueOf(times3.get(0));
-            //String bssid = String.valueOf(times4.get(0));
-            //String info = getInfo(wifiManager);
-            if((time.after(comparison1)) && (time.after(comparison2)) && dayOfTheWeek.equals(currentDay)){
+            String bssid = String.valueOf(times4.get(0));
+            String info = getInfo(wifiManager);
+            if((time.after(comparison1)) && (time.after(comparison2)) && dayOfTheWeek.equals(currentDay) && info.equals(bssid)){
                 resetText();
                 dbHandler.insertSigned(username, stringTime, code);
             }else{

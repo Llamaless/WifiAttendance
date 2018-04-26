@@ -216,7 +216,7 @@ public class DBHandler extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery("SELECT code FROM studentClass WHERE id" + "=?", new String[]{id});
         cursor.moveToFirst();
         while(cursor.isAfterLast()==false){
-            code.add(cursor.getString(0));
+            code.add(cursor.getString(cursor.getColumnIndex("code")));
             cursor.moveToNext();
         }
         return code;

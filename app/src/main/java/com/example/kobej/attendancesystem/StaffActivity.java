@@ -33,7 +33,7 @@ public class StaffActivity extends Activity{
         String username = String.valueOf(carried.get(0));
 
          /*
-        Setting up Database hanler
+        Setting up Database handler
          */
         dbHandler = new DBHandler(this);
         listViewSetUp(username);
