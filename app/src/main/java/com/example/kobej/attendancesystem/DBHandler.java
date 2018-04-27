@@ -103,6 +103,7 @@ public class DBHandler extends SQLiteOpenHelper {
         return true;
     }
 
+    //Inserts new set of staff details into the database
     public boolean insertDetailsS(Integer idNumber, String username, String password){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -113,17 +114,7 @@ public class DBHandler extends SQLiteOpenHelper {
         return true;
     }
 
-    public boolean insertClass(String code, String name, String startTime, String endTime){
-        SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues contentValues = new ContentValues();
-        contentValues.put("code", code);
-        contentValues.put("name", name);
-        contentValues.put("startTime", startTime);
-        contentValues.put("endTime", endTime);
-        db.insert("class", null, contentValues);
-        return true;
-    }
-
+    //inserts a new student class relationship
     public boolean insertSC(Integer id, String code){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -133,6 +124,7 @@ public class DBHandler extends SQLiteOpenHelper {
         return true;
     }
 
+    //inserts a new class into the database
     public boolean insertClass2(String code, String name, String startTime, String endTime, String day){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -145,6 +137,7 @@ public class DBHandler extends SQLiteOpenHelper {
         return true;
     }
 
+    //Inserts a new lecture class relationship
     public boolean insertLC(Integer id, String code){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -154,6 +147,7 @@ public class DBHandler extends SQLiteOpenHelper {
         return true;
     }
 
+    //Inserts a new class bssid relationship
     public boolean insertClassI(String code, String day, String bssid){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -164,6 +158,7 @@ public class DBHandler extends SQLiteOpenHelper {
         return true;
     }
 
+    //Insert a new record when a student signs in
     public boolean insertSigned(String username, String time, String code){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
@@ -174,6 +169,7 @@ public class DBHandler extends SQLiteOpenHelper {
         return true;
     }
 
+    //gets an array list of student passwords
     public ArrayList getPasswordStudent(String username1){
         ArrayList<String> password = new ArrayList<>();
         SQLiteDatabase db =  this.getReadableDatabase();
@@ -186,6 +182,7 @@ public class DBHandler extends SQLiteOpenHelper {
        return password;
     }
 
+    //gets an array list of staff passwords
     public ArrayList getPasswordStaff(String username1){
         ArrayList<String> password = new ArrayList<>();
         SQLiteDatabase db =  this.getReadableDatabase();
@@ -198,6 +195,7 @@ public class DBHandler extends SQLiteOpenHelper {
         return password;
     }
 
+    //These two methods gather thee code for necessary classes
     public ArrayList getStudentClasses1(String username1){
         ArrayList<String> id = new ArrayList<>();
         SQLiteDatabase db =  this.getReadableDatabase();
@@ -222,6 +220,7 @@ public class DBHandler extends SQLiteOpenHelper {
         return code;
     }
 
+    //These 3 methods gather the 3 different types of data from the class2 table
     public ArrayList getTimes1(String code){
         ArrayList times = new ArrayList();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -258,6 +257,7 @@ public class DBHandler extends SQLiteOpenHelper {
         return times;
     }
 
+    //Gets the bssid from class I to match with the bssid gathere by the WifiManager
     public ArrayList getTimes4(String code){
         ArrayList times = new ArrayList();
         SQLiteDatabase db = this.getReadableDatabase();
@@ -270,6 +270,7 @@ public class DBHandler extends SQLiteOpenHelper {
         return times;
     }
 
+    //These two methods get the code for classes to populate the list view
     public ArrayList getLClasses1(String username1){
         ArrayList<String> id = new ArrayList<>();
         SQLiteDatabase db =  this.getReadableDatabase();
@@ -293,6 +294,8 @@ public class DBHandler extends SQLiteOpenHelper {
         }
         return code;
     }
+
+    //Gets the list of students from the signed in table in relation to class
     public ArrayList<String> getAllStudents(String code){
         ArrayList<String> arrayList = new ArrayList<>();
         SQLiteDatabase db = this.getReadableDatabase();

@@ -41,6 +41,9 @@ public class StaffActivity extends Activity{
     }
 
     public void listViewSetUp(String username){
+        /*
+        Sets up the listview with the list of classes
+         */
         setTextUser(username);
         final ListView classes;
         classes = findViewById(R.id.listClasses);
@@ -61,7 +64,9 @@ public class StaffActivity extends Activity{
     }
 
     public void resetListView(String code){
-        //String[] test = new String[] {"Josh Grobin", "Homer Simpson", "Leela"};
+        /*
+        Resets the listview to be the students from the class selected
+         */
         setTextInfo();
         ArrayList students;
         students = dbHandler.getAllStudents(code);
@@ -78,6 +83,9 @@ public class StaffActivity extends Activity{
     }
 
     public void logOutButton(){
+        /*
+        Logs the user out
+         */
         final Intent finished = new Intent(this, LoginActivity.class);
         Button logOut;
         logOut = findViewById(R.id.buttonSignOut);
@@ -91,18 +99,27 @@ public class StaffActivity extends Activity{
     }
 
     public void setTextUser(String username){
+        /*
+        Sets the text at the top of the screen
+         */
         TextView name;
         name = findViewById(R.id.textName);
         name.setText(username);
     }
 
     public void setTextInfo(){
+        /*
+        resets the text, after the listview changes
+         */
         TextView info;
         info = findViewById(R.id.textName);
         info.setText("These students are currently signed in");
     }
     @Override
     public void onBackPressed(){
+        /*
+        Changes the way the back button works
+         */
         Intent intent = getIntent();
         ArrayList<String> carried;
         carried = intent.getStringArrayListExtra("carryList");

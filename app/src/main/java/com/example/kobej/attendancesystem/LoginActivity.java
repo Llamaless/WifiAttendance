@@ -47,6 +47,7 @@ public class LoginActivity extends Activity {
 
     }
     public void testData(){
+        //Test data
         dbHandler.insertStudent(005, "Kobe Davis");
         dbHandler.insertStaff(006, "Laman Temple");
         dbHandler.insertDetails(005, "test1", "test1");
@@ -63,6 +64,9 @@ public class LoginActivity extends Activity {
     }
 
     public boolean switchState(){
+        /*
+        Code to control the switch
+         */
         Switch position;
         position = findViewById(R.id.positionSwitch);
         boolean checked;
