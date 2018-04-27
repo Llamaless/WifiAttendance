@@ -198,6 +198,10 @@ public class ConnectActivity extends Activity {
     }
 
     public void listViewSet(final String user){
+        /*
+        Sets up the listview to contain
+        the classes for each student
+         */
         final ListView classes;
         classes = findViewById(R.id.listClasses2);
         ArrayList id;
