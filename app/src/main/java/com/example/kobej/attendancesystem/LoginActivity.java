@@ -41,8 +41,7 @@ public class LoginActivity extends Activity {
                 .getSystemService(Context.WIFI_SERVICE);
        // dbHandler.insertClassI("101SM", "Thursday", "00:81:c4:e7:39:0e");
         forceWifi(wifiManager);
-        //testData();
-        //dummyData();
+        testData();
         onButtonPress();
 
 
@@ -52,39 +51,10 @@ public class LoginActivity extends Activity {
         dbHandler.insertStaff(006, "Laman Temple");
         dbHandler.insertDetails(005, "test1", "test1");
         dbHandler.insertDetailsS(006, "staff1", "staff1");
-        dbHandler.insertClass2("101SM", "Test Class", "8:00 AM", "11:00 PM", "Thursday");
+        dbHandler.insertClass2("101SM", "Test Class", "8:00 AM", "11:00 PM", "Thursday"); //Need to change the day to whichever day it is when testing
         dbHandler.insertSC(005, "101SM");
         dbHandler.insertLC(006, "101SM");
-        dbHandler.insertClassI("102SM", "Wednesday", "02:00:00:00:00:00");
-    }
-
-    public void dummyData(){
-        dbHandler.insertStudent(6, "Jamel King");
-        dbHandler.insertStudent(7, "Fred Dope");
-        dbHandler.insertStudent(8, "Kyron Killew");
-        dbHandler.insertStudent(9, "Lina Kyu");
-        dbHandler.insertStudent(10, "Michelle Rhodes");
-        dbHandler.insertStudent(11, "Kira Phantom");
-        dbHandler.insertDetails(6, "jamel", "jamel");
-        dbHandler.insertDetails(7, "fred", "fred");
-        dbHandler.insertDetails(8, "kyron", "kyron");
-        dbHandler.insertDetails(9, "lina", "lina");
-        dbHandler.insertDetails(10, "michelle", "michelle");
-        dbHandler.insertDetails(11, "kira", "kira");
-        dbHandler.insertSC(6, "101SM");
-        dbHandler.insertSC(7, "101SM");
-        dbHandler.insertSC(8, "101SM");
-        dbHandler.insertSC(9, "101SM");
-        dbHandler.insertSC(10, "101SM");
-        dbHandler.insertSC(11, "101SM");
-        dbHandler.insertSC(6, "107SM");
-        dbHandler.insertSC(7, "107SM");
-        dbHandler.insertSC(8, "107SM");
-        dbHandler.insertClass2("107SM", "History", "8:00 AM", "6:00 PM", "Thursday");
-        dbHandler.insertStaff(7, "Tishe Kingro");
-        dbHandler.insertDetailsS(7, "staff2", "staff2");
-        dbHandler.insertLC(7, "101SM");
-        dbHandler.insertLC(6, "107SM");
+        dbHandler.insertClassI("102SM", "Wednesday", "02:00:00:00:00:00"); //need to change the BSSID to the BSSID of the router your working on when testing
     }
 
     public void forceWifi(WifiManager wifiManager){
