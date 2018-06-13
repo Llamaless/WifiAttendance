@@ -61,8 +61,7 @@ public class LoginActivity extends Activity {
     public void forceWifi(WifiManager wifiManager){
         //Forces the wifi to be on allowing the app to work
         wifiManager.setWifiEnabled(true);
-    }
-
+    
     public boolean switchState(){
         /*
         Code to control the switch
@@ -90,7 +89,7 @@ public class LoginActivity extends Activity {
         String user = String.valueOf(username.getText());
         String pass = String.valueOf(password.getText());
         ArrayList actualPass = dbHandler.getPasswordStudent(user);
-        Integer act = actualPass.size();
+        Integer act = pass.size();
         String actualPassString = String.valueOf(actualPass.get(0));
         //comparing gathered values to known values
         if(act.equals(0)){
